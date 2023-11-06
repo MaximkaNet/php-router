@@ -39,66 +39,66 @@ class Router {
 
     /**
      * Set request method POST
-     * @param $path
-     * @param $callback
+     * @param string $path
+     * @param callable $callback
      * @return void
      */
-    public function post($path, $callback)
+    public function post(string $path, callable $callback)
     {
         $this->setRoute($path,"post", $callback);
     }
 
     /**
      * Set request method PUT
-     * @param $path
-     * @param $callback
+     * @param string $path
+     * @param callable $callback
      * @return void
      */
-    public function put($path, $callback)
+    public function put(string $path, callable $callback)
     {
         $this->setRoute($path,"put", $callback);
     }
 
     /**
      * Set request method PATCH
-     * @param $path
-     * @param $callback
+     * @param string $path
+     * @param callable $callback
      * @return void
      */
-    public function patch($path, $callback)
+    public function patch(string $path, callable $callback)
     {
         $this->setRoute($path,"patch", $callback);
     }
 
     /**
      * Set request method DELETE
-     * @param $path
-     * @param $callback
+     * @param string $path
+     * @param callable $callback
      * @return void
      */
-    public function delete($path, $callback)
+    public function delete(string $path, callable $callback)
     {
         $this->setRoute($path,"delete", $callback);
     }
 
     /**
      * Set not found callback
-     * @param $callback
+     * @param callable $callback
      * @return void
      */
-    public function notFound($callback)
+    public function notFound(callable $callback)
     {
         $this->setRoute('/404', 'get', $callback);
     }
 
     /**
      * Append the route
-     * @param $path
-     * @param $method
-     * @param $callback
+     * @param string $path
+     * @param string $method
+     * @param callable $callback
      * @return void
      */
-    public function setRoute($path, $method, $callback)
+    public function setRoute(string $path, string $method, callable $callback)
     {
         $this->routes[strtoupper($method)][Router::normalizePath($path, $this->prefix)] = $callback;
     }
