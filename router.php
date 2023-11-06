@@ -3,9 +3,15 @@
 namespace router;
 class Router {
     private $routes = [];
-    private $base;
-    function __construct($base = "") {
-        $this->base = $base;
+    private $prefix;
+    /**
+     * Prefix in url
+     * @example http://domain.com/prefix/single_page - single page
+     * @example http://domain.com/prefix - home page
+     * @param string $prefix
+     */
+    function __construct(string $prefix = "") {
+        $this->prefix = $prefix;
         $this->setRoute('/404', 'get', function (){
             echo 'Page not found';
         });
@@ -15,9 +21,9 @@ class Router {
      * Return base
      * @return string
      */
-    public function getBase(): string
+    public function getPrefix(): string
     {
-        return $this->base;
+        return $this->prefix;
     }
 
     /**
@@ -94,7 +100,7 @@ class Router {
      */
     public function setRoute($path, $method, $callback)
     {
-        $this->routes[strtoupper($method)][Router::normalizePath($path, $this->base)] = $callback;
+        $this->routes[strtoupper($method)][Router::normalizePath($path, $this->prefix)] = $callback;
     }
 
     /**
@@ -105,7 +111,7 @@ class Router {
      */
     public function getRoute(string $path, string $method)
     {
-        return $this->routes[strtoupper($method)][Router::normalizePath($path, $this->base)];
+        return $this->routes[strtoupper($method)][Router::normalizePath($path, $this->prefix)];
     }
     /**
      * Get request method
@@ -129,12 +135,12 @@ class Router {
     /**
      * Return normalized path
      * @param string $path
-     * @param string $base
+     * @param string $prefix
      * @return string
      */
-    private static function normalizePath(string $path, string $base = ""): string
+    private static function normalizePath(string $path, string $prefix = ""): string
     {
-        $path_with_prefix = $base;
+        $path_with_prefix = $prefix;
         $path_with_prefix .= $path[0] != "/" ? "/" : "";
         $path_with_prefix .= $path;
 
