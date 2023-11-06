@@ -1,6 +1,8 @@
 # Simple php router
 It is an easy-to-use router for your application in `php`.
 
+### Full documentation is available in `docs-<version>` branch
+
 # Getting started
 Before we start working with the router, we need to set up
 our application. To do this, we need to create a file in the root of the project
