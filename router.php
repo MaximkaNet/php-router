@@ -152,6 +152,27 @@ class Router {
     }
 
     /**
+     * Return relative link like this: ./relative_link
+     * @param string $path
+     * @return string
+     */
+    public static function relativeLink(string $path): string
+    {
+        return '.' . Router::normalizePath($path);
+    }
+
+    /**
+     * Return absolute link like this: /absolute_link
+     * @param string $path
+     * @param string $prefix
+     * @return string
+     */
+    public static function absoluteLink(string $path, string $prefix = ""): string
+    {
+        return Router::normalizePath($path, $prefix);
+    }
+
+    /**
      * Get query param
      * @param string $key
      * @return string
