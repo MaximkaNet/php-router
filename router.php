@@ -92,7 +92,8 @@ class Router {
     }
 
     /**
-     * Append the route
+     * Append the route.<br>
+     * You can add callback to several methods like this "get|post|patch"
      * @param string $path
      * @param string $method
      * @param callable $callback
@@ -100,7 +101,10 @@ class Router {
      */
     public function setRoute(string $path, string $method, callable $callback)
     {
-        $this->routes[strtoupper($method)][Router::normalizePath($path, $this->prefix)] = $callback;
+        $methods = explode("|", strtoupper($method));
+        foreach ($methods as $_method){
+            $this->routes[$_method][Router::normalizePath($path, $this->prefix)] = $callback;
+        }
     }
 
     /**
